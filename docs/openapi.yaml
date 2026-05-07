@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  title: Content Workflow Intelligence Platform
+  version: 1.0.0
+  description: >
+    Recruiter-ready API for publishing-readiness analysis, workflow bottleneck
+    detection, and editorial prioritization.
+servers:
+  - url: http://localhost:3000
+paths:
+  /health:
+    get:
+      summary: Service health status
+      responses:
+        '200':
+          description: Healthy service response
+  /api/content:
+    get:
+      summary: List content items
+      responses:
+        '200':
+          description: Array of content items
+  /api/content/{id}:
+    get:
+      summary: Get one content item
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Content item
+        '404':
+          description: Content item not found
+  /api/authors:
+    get:
+      summary: List authors
+      responses:
+        '200':
+          description: Array of author records
+  /api/queues:
+    get:
+      summary: List workflow queues
+      responses:
+        '200':
+          description: Array of queue records
+  /api/approvals:
+    get:
+      summary: List approval records
+      responses:
+        '200':
+          description: Array of approval records
+  /api/blockers:
+    get:
+      summary: List publishing blockers
+      responses:
+        '200':
+          description: Array of blocker records
+  /api/dashboard/summary:
+    get:
+      summary: Dashboard summary
+      responses:
+        '200':
+          description: Aggregate workflow summary
+  /api/analyze/readiness:
+    post:
+      summary: Analyze publishing readiness
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Readiness analysis
+  /api/analyze/bottleneck:
+    post:
+      summary: Analyze workflow bottlenecks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Bottleneck analysis
+  /api/analyze/prioritization:
+    post:
+      summary: Analyze prioritization and routing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Prioritization analysis
